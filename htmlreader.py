@@ -26,8 +26,7 @@ class HtmlReader:
 		# break multi-headlines into a line each
 		chunks = (phrase.strip() for line in lines for phrase in line.split("  "))
 		# drop blank lines
-		text = '\n'.join(chunk for chunk in chunks if chunk)
-		# text = ' '.join(chunk for chunk in chunks if chunk)
+		text = ' '.join(chunk for chunk in chunks if chunk)
 
 		# print text
 		self.writeDocument(text)

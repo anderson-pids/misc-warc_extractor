@@ -1,30 +1,38 @@
 import sys
 import htmlreader as hr
 import test
+import warcextracter as we
 import filemanager
+
+
+def extractContent(reader,page):
+	reader.setHtmlPage(page)
+	reader.proccess()
+	
+
+def extractPages(path):
+	extractor = we.WarcExtracter()
+	extractor.setFilePath(path)
+	extractor.proccess();
+
+	return extractor.getPages()
 
 def main(argv):
 	folder_path = argv[0]
-
-	#TODO:: Get files into the folder
+	pages = []
+	#Get files into the folder
 	files = filemanager.GetFiles(folder_path, "warc.gz")
-	print files;
-	#TODO:: Get pages from warc.gz
 
-	exit(0)
-	#TODO:: Extract content from html pages and write into the file
-	html_page = test.test()
-	html_page2 = test.test2()
+	#Get pages from warc.gz
+	for path in files:
+		pages = extractPages(path)
 
+	#Get content from html pages and write into files
 	reader = hr.HtmlReader()
-	
-	# for to add html pages
-	reader.setHtmlPage(html_page)
-	reader.proccess()
-	reader.setHtmlPage(html_page2)
-	reader.proccess()
-
+	for page in pages:
+		extractContent(reader,page)
 	reader.close()
+
 
 
 if __name__ == "__main__":

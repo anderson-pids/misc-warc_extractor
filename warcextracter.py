@@ -12,8 +12,13 @@ class WarcExtracter:
 		for record in f:
 			warc_type = record['warc-type']
 			if(warc_type == "response"):
-				self.pages.append(record.payload)
+				payload = self.removeHeader(record.payload)
+				self.pages.append(payload)
 
-	def getPages():
+	def getPages(self):
 		return self.pages
+
+	def removeHeader(self, payload):
+		page = payload.split("\n\n", 1)
+		return page[1]
 
