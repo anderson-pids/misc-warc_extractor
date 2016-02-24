@@ -1,6 +1,5 @@
 import sys
 import htmlreader as hr
-import test
 import warcextracter as we
 import filemanager
 
