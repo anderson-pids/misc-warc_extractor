@@ -15,7 +15,8 @@ class HtmlReader:
 		self.page = htmlPage
 
 	def proccess(self):
-		soup = BeautifulSoup(self.page)
+		# soup = BeautifulSoup(self.page,"html5lib")
+		soup = BeautifulSoup(self.page,"html.parser")
 
 		# kill all script and style elements
 		for script in soup(["script", "style"]):
